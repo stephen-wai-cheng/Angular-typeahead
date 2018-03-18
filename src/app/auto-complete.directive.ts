@@ -1,13 +1,16 @@
-import { Directive, ElementRef, OnInit } from '@angular/core';
+import { Directive, ElementRef, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { of } from 'rxjs/observable/of';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs/Subscription';
 
 @Directive({
   selector: '[appAutoComplete]'
 })
-export class AutoCompleteDirective implements OnInit {
+export class AutoCompleteDirective implements OnInit, OnDestroy {
+
+  @Output('foundItems') public foundItems = new EventEmitter<any>();
 
   private data = [
     'Star Wars: The Last Jedi',
@@ -22,26 +25,35 @@ export class AutoCompleteDirective implements OnInit {
     'Wonder Woman'
   ];
 
-  foundItems = [];
+  private _foundItems = [];
+  keyUpSubscription: Subscription = null;
 
   constructor(private hostElement: ElementRef) { }
 
   ngOnInit() {
-
-    const tyepAhead$ = fromEvent(this.hostElement.nativeElement, 'keyup')
+    this.keyUpSubscription = fromEvent(this.hostElement.nativeElement, 'keyup')
       .pipe(
         map((e: KeyboardEvent) => this.hostElement.nativeElement.value),
         filter(text => text.length > 2),
-        debounceTime(10),
+        debounceTime(100),
         distinctUntilChanged(),
         switchMap(
           () => of(this.data.filter(
             (element, index, array) => element.toLowerCase().indexOf(this.hostElement.nativeElement.value.toLowerCase()) >= 0
           )
           ).pipe(
-            map(items => this.foundItems = items)
+            map(items => {
+              this._foundItems = items;
+              this.foundItems.emit(items);
+            })
           )
         )
-      ).subscribe((data) => console.log(this.foundItems));
+      ).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    if (this.keyUpSubscription) {
+      this.keyUpSubscription.unsubscribe();
+    }
   }
 }

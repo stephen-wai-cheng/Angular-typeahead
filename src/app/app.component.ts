@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  foundItems = ['aa', 'bb'];
+
+  foundItemsChange(event) {
+    this.foundItems = event;
+  }
 }

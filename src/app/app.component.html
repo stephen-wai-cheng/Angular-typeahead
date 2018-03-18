@@ -3,7 +3,10 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <input type="text" appAutoComplete id="monkey-brain">
+  <input type="text" id="monkey-brain" appAutoComplete (foundItems)="foundItemsChange($event)" />
+  <ul>
+    <li *ngFor="let movie of foundItems">{{movie}}</li>
+  </ul>
 </div>
-<app-async-observable-pipe></app-async-observable-pipe>
+<!-- <app-async-observable-pipe></app-async-observable-pipe> -->
 
