@@ -4,12 +4,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { TestsComponent } from './tests/tests.component';
-import { AsyncObservablePipeComponent } from './async-observable-pipe/async-observable-pipe.component';
 import { AutoCompleteDirective } from './auto-complete.directive';
 import { TypeAheadComponent } from './type-ahead/type-ahead.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './/app-routing.module';
-import { AutoTestComponent } from './auto-test/auto-test.component';
+import { AsyncObservablePipeComponent } from './routes/async-observable-pipe/async-observable-pipe.component';
+import { AutoCompleteRouteComponent } from './routes/auto-complete-route/auto-complete-route.component';
+import { TypeAheadRouteComponent } from './routes/type-ahead-route/type-ahead-route.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AutoTestComponent } from './auto-test/auto-test.component';
     AsyncObservablePipeComponent,
     AutoCompleteDirective,
     TypeAheadComponent,
-    AutoTestComponent
+    AutoCompleteRouteComponent,
+    TypeAheadRouteComponent
   ],
   imports: [
     BrowserModule,

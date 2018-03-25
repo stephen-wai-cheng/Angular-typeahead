@@ -1,4 +1,14 @@
-import { Component, Provider, forwardRef, ViewChild, ElementRef, AfterViewInit, OnDestroy, ViewChildren, QueryList } from '@angular/core';
+import {
+  Component,
+  Provider,
+  forwardRef,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
+  Input
+} from '@angular/core';
+
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { fromEvent } from 'rxjs/observable/fromEvent';
@@ -19,19 +29,7 @@ const noOp = () => { };
 })
 export class TypeAheadComponent implements ControlValueAccessor, OnDestroy, AfterViewInit {
   @ViewChild('typeAhead') input: ElementRef;
-
-  private data = [
-    'Star Wars: The Last Jedi',
-    'Beauty and the Beast',
-    'The Fate of the Furious',
-    'Despicable Me 3',
-    'Jumanji: Welcome to the Jungle',
-    'Spider-Man: Homecoming',
-    'Wolf Warrior 2',
-    'Guardians of the Galaxy Vol. 2',
-    'Thor: Ragnarok',
-    'Wonder Woman'
-  ];
+  @Input() data = [];
 
   private onTouchedCallback: () => void = noOp;
   private onChangeCallback: (_: any) => void = noOp;
@@ -47,18 +45,14 @@ export class TypeAheadComponent implements ControlValueAccessor, OnDestroy, Afte
   }
 
   // set accessor including call the onchange callback
-  set value(v: any) {
-    if (v !== this._value) {
-      this._value = v;
-      this.onChangeCallback(v);
+  set value(newValue: any) {
+    if (newValue !== this._value) {
+      this._value = newValue;
+      this.onChangeCallback(newValue);
     }
   }
 
   constructor() { }
-
-  anchorClick(event) {
-    console.log(event);
-  }
 
   select(item: string) {
     this.value = item;
@@ -106,7 +100,7 @@ export class TypeAheadComponent implements ControlValueAccessor, OnDestroy, Afte
   }
 
   setDisabledState?(isDisabled: boolean): void {
-
+    this.input.nativeElement.readOnly = isDisabled;
   }
 
 }

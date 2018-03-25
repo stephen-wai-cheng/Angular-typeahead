@@ -2,11 +2,11 @@ ul {
     padding: 0;
     margin: 0;
     border: 1px solid #d2d2d2;
-    width: auto;
 }
 
 li {
     padding: 5px;
+    width: auto;
 }
 
 a:link,
@@ -15,12 +15,14 @@ a:visited {
 }
 
 a {
+    display: block;
     width: 100%;
+	color:rgb(37, 37, 37);
 }
 
 li:hover,
 a:hover,
 a:focus {
-	color:#fff;
-	background:#727454;
+	color:rgb(37, 37, 37);
+	background:#eff0f1;
 }

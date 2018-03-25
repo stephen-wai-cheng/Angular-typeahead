@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TypeAheadComponent } from './type-ahead/type-ahead.component';
-import { AsyncObservablePipeComponent } from './async-observable-pipe/async-observable-pipe.component';
-import { AutoTestComponent } from './auto-test/auto-test.component';
+import { TypeAheadRouteComponent } from './routes/type-ahead-route/type-ahead-route.component';
+import { AsyncObservablePipeComponent } from './routes/async-observable-pipe/async-observable-pipe.component';
+import { AutoCompleteRouteComponent } from './routes/auto-complete-route/auto-complete-route.component';
 
 const routes: Routes = [
-  { path: 'typeahead', component: TypeAheadComponent },
+  { path: 'typeahead', component: TypeAheadRouteComponent },
   { path: 'asyncpipe', component: AsyncObservablePipeComponent },
-  { path: 'autodirective', component: AutoTestComponent }
+  { path: 'autodirective', component: AutoCompleteRouteComponent }
 ];
 
 @NgModule({

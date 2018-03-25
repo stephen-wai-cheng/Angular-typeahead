@@ -4,8 +4,7 @@ import { Subscriber } from 'rxjs/Subscriber';
 
 @Component({
   selector: 'app-async-observable-pipe',
-  templateUrl: './async-observable-pipe.component.html',
-  styleUrls: ['./async-observable-pipe.component.css']
+  templateUrl: './async-observable-pipe.component.html'
 })
 export class AsyncObservablePipeComponent implements OnInit {
 
