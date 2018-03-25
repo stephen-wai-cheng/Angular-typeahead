@@ -8,6 +8,8 @@ import { AsyncObservablePipeComponent } from './async-observable-pipe/async-obse
 import { AutoCompleteDirective } from './auto-complete.directive';
 import { TypeAheadComponent } from './type-ahead/type-ahead.component';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './/app-routing.module';
+import { AutoTestComponent } from './auto-test/auto-test.component';
 
 
 @NgModule({
@@ -16,11 +18,13 @@ import { FormsModule } from '@angular/forms';
     TestsComponent,
     AsyncObservablePipeComponent,
     AutoCompleteDirective,
-    TypeAheadComponent
+    TypeAheadComponent,
+    AutoTestComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

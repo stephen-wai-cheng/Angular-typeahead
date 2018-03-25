@@ -1,0 +1,4 @@
+<input type="text" id="monkey-brain" appAutoComplete (foundItems)="foundItemsChange($event)" />
+<ul>
+  <li *ngFor="let movie of foundItems">{{movie}}</li>
+</ul>

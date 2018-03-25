@@ -1,14 +1,9 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <input type="text" id="monkey-brain" appAutoComplete (foundItems)="foundItemsChange($event)" />
-  <ul>
-    <li *ngFor="let movie of foundItems">{{movie}}</li>
-  </ul>
-</div>
-<!-- <app-async-observable-pipe></app-async-observable-pipe> -->
+<h1>{{title}}</h1>
 
-<app-type-ahead [(ngModel)]="title"></app-type-ahead>
+<nav>
+  <a routerLink="/asyncpipe">Async Pipe</a>
+  <a routerLink="/autodirective">Autocomplete directive test</a>
+  <a routerLink="/typeahead">Type Ahead</a>
+</nav>
+<router-outlet></router-outlet>
 

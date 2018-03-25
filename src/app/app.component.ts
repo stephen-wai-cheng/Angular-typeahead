@@ -6,10 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
-  foundItems = ['aa', 'bb'];
-
-  foundItemsChange(event) {
-    this.foundItems = event;
-  }
+  title = 'Angular Observable Spikes';
 }
