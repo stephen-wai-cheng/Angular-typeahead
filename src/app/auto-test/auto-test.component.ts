@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auto-test.component.css']
 })
 export class AutoTestComponent implements OnInit {
-  foundItems = ['aa', 'bb'];
+  foundItems = [];
 
   foundItemsChange(event) {
     this.foundItems = event;

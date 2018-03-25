@@ -1,4 +1,4 @@
-import { Component, Provider, forwardRef, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, Provider, forwardRef, ViewChild, ElementRef, AfterViewInit, OnDestroy, ViewChildren, QueryList } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { fromEvent } from 'rxjs/observable/fromEvent';
@@ -56,6 +56,10 @@ export class TypeAheadComponent implements ControlValueAccessor, OnDestroy, Afte
 
   constructor() { }
 
+  anchorClick(event) {
+    console.log(event);
+  }
+
   select(item: string) {
     this.value = item;
     this.foundItems = [];
@@ -74,7 +78,6 @@ export class TypeAheadComponent implements ControlValueAccessor, OnDestroy, Afte
         filter(text => text.length > 2),
         debounceTime(100),
         distinctUntilChanged(),
-        map(() => console.log(`value [keyup] : ${this.input.nativeElement.value}`)),
         switchMap(
           () => of(this.data.filter(
             (element, index, array) => element.toLowerCase().indexOf(this.input.nativeElement.value.toLowerCase()) >= 0
