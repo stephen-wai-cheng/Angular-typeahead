@@ -1,2 +1,6 @@
-<app-type-ahead [(ngModel)]="autoCompleteText" [data]="getMovieList([2016, 2017])"></app-type-ahead>
-<div>***** auto-complete text : {{autoCompleteText}}</div>
+<form #taForm="ngForm">
+    <app-type-ahead name="taComp" [(ngModel)]="autoCompleteText" [data]="getMovieList([2016, 2017])"></app-type-ahead>
+    <div>***** auto-complete text : {{autoCompleteText}}</div>
+    <div>form.valid: {{taForm.valid}}</div>
+    <div>{{taForm.value|json}}</div>
+</form>

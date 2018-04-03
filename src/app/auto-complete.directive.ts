@@ -34,7 +34,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy {
     this.keyUpSubscription = fromEvent(this.hostElement.nativeElement, 'keyup')
       .pipe(
         map((e: KeyboardEvent) => this.hostElement.nativeElement.value),
-        filter(text => text.length > 2),
+        filter((text: string) => text.length > 2),
         debounceTime(100),
         distinctUntilChanged(),
         switchMap(
@@ -42,7 +42,7 @@ export class AutoCompleteDirective implements OnInit, OnDestroy {
             (element, index, array) => element.toLowerCase().indexOf(this.hostElement.nativeElement.value.toLowerCase()) >= 0
           )
           ).pipe(
-            map(items => {
+            map((items: any[]) => {
               this._foundItems = items;
               this.foundItems.emit(items);
             })

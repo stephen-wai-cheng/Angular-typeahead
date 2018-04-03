@@ -9,7 +9,7 @@ import {
   Input
 } from '@angular/core';
 
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, Validators, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -21,14 +21,22 @@ const noOp = () => { };
   selector: 'app-type-ahead',
   templateUrl: './type-ahead.component.html',
   styleUrls: ['./type-ahead.component.css'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => TypeAheadComponent),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TypeAheadComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: TypeAheadComponent,
+      multi: true
+    }
+  ]
 })
-export class TypeAheadComponent implements ControlValueAccessor, OnDestroy, AfterViewInit {
+export class TypeAheadComponent implements ControlValueAccessor, OnDestroy, AfterViewInit, Validator {
   @ViewChild('typeAhead') input: ElementRef;
+
   @Input() data = [];
 
   private onTouchedCallback: () => void = noOp;
@@ -96,11 +104,19 @@ export class TypeAheadComponent implements ControlValueAccessor, OnDestroy, Afte
   }
 
   onBlur() {
+    console.log(this.input.nativeElement.Validator);
     this.onTouchedCallback();
   }
 
   setDisabledState?(isDisabled: boolean): void {
     this.input.nativeElement.readOnly = isDisabled;
+  }
+
+  validate(c: AbstractControl): { [key: string]: any; } {
+    // console.log(this.constructor.name);
+    console.log(this.input);
+    console.log(this.input.nativeElement);
+    return this.input.nativeElement.validity.valid ? null : { boo: 'some error' };
   }
 
 }

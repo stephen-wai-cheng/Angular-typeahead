@@ -1,0 +1,1 @@
+C:\Development\Javascript\angular4\node-sass\vendor\win32-x64-57\binding.node

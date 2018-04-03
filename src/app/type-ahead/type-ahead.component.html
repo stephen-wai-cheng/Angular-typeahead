@@ -1,4 +1,4 @@
-<input #typeAhead type="text" (blur)="onBlur()" [(ngModel)]="value">
+<input #typeAhead type="text" (blur)="onBlur()" [(ngModel)]="value" required />
 <ul *ngIf="foundItems.length>0">
   <li *ngFor="let item of foundItems" (click)="select(item)"><a [routerLink]="" href="#">{{item}}</a></li>
 </ul>
