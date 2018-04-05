@@ -1,4 +1,9 @@
-<input #typeAhead type="text" (blur)="onBlur()" [(ngModel)]="value" required />
-<ul *ngIf="foundItems.length>0">
-  <li *ngFor="let item of foundItems" (click)="select(item)"><a [routerLink]="" href="#">{{item}}</a></li>
-</ul>
+<input #typeAhead type="text" (blur)="onBlur()" [(ngModel)]="value" required (keydown.arrowdown)="focusItem(0)" />
+<span #taItems>
+  <ul *ngIf="foundItems.length>0">
+    <li *ngFor="let item of foundItems;let i=index;" (click)="select(item)">
+      <a (keydown.arrowup)="focusItem(i-1)" (keydown.arrowdown)="focusItem(i+1)" name="taItem_{{i}}" [routerLink]="" href="#">{{item}}
+      </a>
+    </li>
+  </ul>
+</span>

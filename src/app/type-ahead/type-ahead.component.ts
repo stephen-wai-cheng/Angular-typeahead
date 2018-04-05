@@ -36,6 +36,7 @@ const noOp = () => { };
 })
 export class TypeAheadComponent implements ControlValueAccessor, OnDestroy, AfterViewInit, Validator {
   @ViewChild('typeAhead') input: ElementRef;
+  @ViewChild('taItems') taItems: ElementRef;
 
   @Input() data = [];
 
@@ -113,10 +114,18 @@ export class TypeAheadComponent implements ControlValueAccessor, OnDestroy, Afte
   }
 
   validate(c: AbstractControl): { [key: string]: any; } {
-    // console.log(this.constructor.name);
-    console.log(this.input);
-    console.log(this.input.nativeElement);
     return this.input.nativeElement.validity.valid ? null : { boo: 'some error' };
   }
 
+  focusItem(i: number) {
+    const numItems = this.taItems.nativeElement.querySelectorAll('a[name^="taItem_"]').length;
+    console.log(`focusItem : ${i}, numItems : ${numItems}`);
+    if (i >= 0 && i < numItems) {
+      const targetItem = this.taItems.nativeElement.querySelector(`a[name="taItem_${i}"]`);
+      if (targetItem) {
+        targetItem.focus();
+      }
+    }
+    return false;
+  }
 }
